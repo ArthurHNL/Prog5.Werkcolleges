@@ -1,0 +1,65 @@
+﻿<UserControl x:Class="EFWPF.Client.View.PersonView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:mvvm="http://www.galasoft.ch/mvvmlight"
+             xmlns:local="clr-namespace:EFWPF.Client.View"
+             xmlns:localconv="clr-namespace:EFWPF.Client.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding PeopleVM, Source={StaticResource Locator}}">
+    <!-- Resources Koppelen -->
+    <UserControl.Resources>
+        <localconv:GenderConverter x:Key="genderConverter"/>
+        <localconv:DateConverter x:Key="dateConverter"/>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50*"/>
+            <RowDefinition Height="40*"/>
+            <RowDefinition Height="280*"/>
+            <RowDefinition Height="75*"/>
+        </Grid.RowDefinitions>
+        <TextBlock TextWrapping="Wrap"
+                    TextAlignment="Center" Text="Alle Personen" FontWeight="Bold" FontSize="30"/>
+        <DataGrid x:Name="dg" Grid.Row="2" ItemsSource="{Binding People}" 
+                  Margin="0,10,0,28" ColumnWidth="*"
+                  IsReadOnly="True" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Voornaam" Binding="{Binding Firstname}" />
+                <DataGridTextColumn Header="Achternaam" Binding="{Binding Lastname}" />
+                <DataGridTextColumn Header="Geboren op" Binding="{Binding Birthdate, Converter={StaticResource dateConverter}}" />
+                <DataGridTextColumn Header="Geslacht" Width="0.5*" Binding="{Binding Gender, Converter={StaticResource genderConverter}}" />
+            </DataGrid.Columns>
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="SelectionChanged">
+                    <mvvm:EventToCommand 
+                        Command="{Binding SendPersonCommand, Mode=OneWay}"
+                        CommandParameter="{Binding ElementName=dg,Path=SelectedItem}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </DataGrid>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <TextBlock HorizontalAlignment="Left" Margin="10,7,0,0" Grid.Row="1" FontSize="18"
+                       Text="Zoek een persoon:" VerticalAlignment="Top" />
+            <TextBox HorizontalAlignment="Left" Height="30" Margin="20,0,0,0" 
+                     Grid.Row="1" FontSize="18" Foreground="Red" Text="{Binding PersonName, UpdateSourceTrigger=PropertyChanged}"
+                     VerticalContentAlignment="Center" Width="310">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="TextChanged">
+                        <mvvm:EventToCommand 
+                            Command="{Binding SearchCommand, Mode=OneWay}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </TextBox>
+        </StackPanel>
+        <Button x:Name="btnGetPeople" Content="Toon alle Personen"
+                Grid.Row="3" FontSize="30" 
+                Background="Blue" Foreground="White"
+                FontWeight="Bold"
+                Command="{Binding GetPeopleCommand}"/>
+    </Grid>
+</UserControl>

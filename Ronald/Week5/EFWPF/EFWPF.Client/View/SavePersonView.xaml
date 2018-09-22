@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="EFWPF.Client.View.SavePersonView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:EFWPF.Client.View"
+             xmlns:localconv="clr-namespace:EFWPF.Client.Converters"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800"
+             DataContext="{Binding PeopleVM, Source={StaticResource Locator}}">
+    <UserControl.Resources>
+        <localconv:GenderConverter x:Key="genderConverter"/>
+        <localconv:NullDateConverter x:Key="nullDateConverter"/>
+    </UserControl.Resources>
+    <Grid>
+        <!-- Layouts kunnen ook met Styles (gebruik daarvoor Blend) -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" MaxHeight="40"/>
+            <RowDefinition Height="*" MaxHeight="40"/>
+            <RowDefinition Height="*" MaxHeight="40"/>
+            <RowDefinition Height="*" MaxHeight="40"/>
+            <RowDefinition Height="*" MaxHeight="40"/>
+            <RowDefinition Height="3*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock FontSize="12" Grid.Row="0" Margin="10,0,0,0" VerticalAlignment="Center" Text="Persoon ID:"/>
+        <TextBlock FontSize="12" Grid.Row="1" Margin="10,0,0,0" VerticalAlignment="Center" Text="Voornaam:"/>
+        <TextBlock FontSize="12" Grid.Row="2" Margin="10,0,0,0" VerticalAlignment="Center" Text="Achternaam:"/>
+        <TextBlock FontSize="12" Grid.Row="3" Margin="10,0,0,0" VerticalAlignment="Center" Text="Geslacht:"/>
+        <TextBlock FontSize="12" Grid.Row="4" Margin="10,0,0,0" VerticalAlignment="Center" Text="Geboren op:"/>
+
+        <TextBlock Grid.Column="1" Grid.Row="0" Height="30" Width="400" Text="{Binding PersonInfo.Id}" VerticalAlignment="Bottom" FontSize="14"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Height="30" Width="400" VerticalContentAlignment="Center" Text="{Binding PersonInfo.Firstname,Mode=TwoWay}"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Height="30" Width="400" VerticalContentAlignment="Center" Text="{Binding PersonInfo.Lastname,Mode=TwoWay}"/>
+        <ComboBox Grid.Column="1" Grid.Row="3" Height="30" Width="400" VerticalContentAlignment="Center" ItemsSource="{Binding GenderTypes}"
+                  DisplayMemberPath="Name"
+                  SelectedValuePath="Value"
+                  SelectedValue="{Binding PersonInfo.Gender}" />
+
+        <DatePicker Grid.Column="1" Grid.Row="4" Height="30" Width="400" VerticalContentAlignment="Center" SelectedDate="{Binding PersonInfo.Birthdate, Converter={StaticResource nullDateConverter}, Mode=TwoWay}" FirstDayOfWeek="Monday" SelectedDateFormat="Long" />
+        <Button Content="Nieuw" FontSize="20" 
+                Height="50" Background="Black" Foreground="White"
+                FontWeight="Bold" Grid.Row="5"
+                Grid.Column="0"
+                Command="{Binding NewCommand}" />
+        <Button Content="Opslaan Persoon" FontSize="20" 
+                Height="50" Width="300" Background="Blue" Foreground="White"
+                FontWeight="Bold" Grid.Row="5"
+                Grid.Column="1"
+                Command="{Binding SaveCommand}" 
+                CommandParameter="{Binding PersonInfo}"/>
+    </Grid>
+</UserControl>
