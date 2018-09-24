@@ -2,12 +2,13 @@
 	* download de developer editie via http://msdnaa.avans.nl
 	* voor installeren zie Webdicdaat
 
-2. Deploy de het Database project naar de database.
+2. Deploy de het Database project naar de database (via rechtermuisklik op het database project).
 	* Gebruik Schema Compare
 	* of via publish script
 
 3. Wijzig connectionstring in app.config van EFWPF.Client
-	* zoek [GEBRUIKER] en [WACHTWOORD] 
-	* wijzig dit in de database gebruiker en wachtwoord welke je hebt aangemaakt tijdens installatie
-	* Heb je alleen je Windows credentials gebruikt zet dan "Integrated Security=true" https://msdn.microsoft.com/en-us/library/jj653752(v=vs.110).aspx#sqlserver
+	* de connection maakt gebruik van Windows Credentials en verwijst naar je lokale installatie: ";initial catalog=EFWPF;integrated security=True;"
+	* Connect je niet met windows maar met een sql gebruiker vervang dan "integrated security=True;" met "persist security info=True;user id=[GEBRUIKER];password=[WACHTWOORD];" 
+		[GEBRUIKER] en [WACHTWOORD] => wijzig dit in de database gebruiker en wachtwoord welke je hebt aangemaakt tijdens installatie
+	* meer informatie: https://msdn.microsoft.com/en-us/library/jj653752(v=vs.110).aspx#sqlserver
 

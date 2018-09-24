@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{799CFA31-80D2-4C5C-A5B2-D9676C37AA1C}</ProjectGuid>
+    <ProjectGuid>{2B110FA9-9114-45C1-839F-3EE9CE5A0D07}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>EFWPF.Repository</RootNamespace>
@@ -12,7 +12,6 @@
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -63,7 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\EFWPF.Data\EFWPF.Data.csproj">
-      <Project>{07498CA8-9620-4BB8-97DC-CA93BB4BF295}</Project>
+      <Project>{084560C2-03E9-47B4-81A0-F32B24A4E18B}</Project>
       <Name>EFWPF.Data</Name>
     </ProjectReference>
   </ItemGroup>
