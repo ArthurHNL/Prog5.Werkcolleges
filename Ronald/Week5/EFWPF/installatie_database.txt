@@ -1,0 +1,13 @@
+1. Installer SQL Server 2017 als dit nog niet is gebeurd.
+	* download de developer editie via http://msdnaa.avans.nl
+	* voor installeren zie Webdicdaat
+
+2. Deploy de het Database project naar de database.
+	* Gebruik Schema Compare
+	* of via publish script
+
+3. Wijzig connectionstring in app.config van EFWPF.Client
+	* zoek [GEBRUIKER] en [WACHTWOORD] 
+	* wijzig dit in de database gebruiker en wachtwoord welke je hebt aangemaakt tijdens installatie
+	* Heb je alleen je Windows credentials gebruikt zet dan "Integrated Security=true" https://msdn.microsoft.com/en-us/library/jj653752(v=vs.110).aspx#sqlserver
+

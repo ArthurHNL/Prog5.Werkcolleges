@@ -17,6 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFWPF.Repository", "EFWPF.R
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFWPF.Data", "EFWPF.Data\EFWPF.Data.csproj", "{07498CA8-9620-4BB8-97DC-CA93BB4BF295}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1AB7E44A-4151-4CED-B788-97C314252A81}"
+	ProjectSection(SolutionItems) = preProject
+		installatie_database.txt = installatie_database.txt
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
